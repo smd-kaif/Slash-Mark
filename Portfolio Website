@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Portfolio</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container">
+        <h1>My Portfolio</h1>
+        <nav>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
+    <section id="hero">
+      <div class="container">
+        <h2>Welcome to my Portfolio!</h2>
+        <p>
+          I am a Web Developer with experience in building responsive and
+          interactive websites.
+        </p>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About Me</h2>
+        <img class="imageAboutPage" src="image.jpg" alt="My Image" />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2>Services</h2>
+        <div class="servicesText card">
+          <i class="fas fa-globe-americas servicesIcon"></i>
+          <div class="card-body">
+            <h5 class="card-title">Web Development</h5>
+            <p class="card-text">
+              I specialize in building responsive and interactive websites using
+              HTML, CSS, and JavaScript.
+            </p>
+          </div>
+        </div>
+        <div class="servicesText card">
+          <i class="fas fa-mobile-alt servicesIcon"></i>
+          <div class="card-body">
+            <h5 class="card-title">Mobile App Development</h5>
+            <p class="card-text">
+              I have experience in building mobile apps using React Native,
+              Swift and Java.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="container">
+        <h2>Projects</h2>
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="project1.jpg"
+            alt="Project 1 Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Project 1</h5>
+            <p class="card-text">
+              This is a description of Project 1.
+            </p>
+          </div>
+        </div>
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="project2.jpg"
+            alt="Project 2 Image"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Project 2</h5>
+            <p class="card-text">
+              This is a description of Project 2.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container">
+        <h2>Contact Me</h2>
+        <div
