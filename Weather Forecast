@@ -1,1 +1,58 @@
+import React, { useState, useEffect } from 'react';
+import './App.css';
+import Weather from './components/Weather';
 
+function App() {
+  const [weatherData, setWeatherData] = useState([]);
+  const [location, setLocation] = useState('');
+
+  useEffect(() => {
+    if (location) {
+      fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric&appid={Your API Key Here}`)
+        .then(response => response.json())
+        .then(data => setWeatherData(data));
+    }
+  }, [location]);
+
+  return (
+    <div className="App">
+      <input
+        type="text"
+        placeholder="Enter location"
+        onChange={e => setLocation(e.target.value)}
+      />
+      <Weather weatherData={weatherData} />
+    </div>
+  );
+}
+
+export default App;
+
+import React from 'react';
+import { Card } from 'semantic-ui-react';
+
+const Weather = ({ weatherData }) => {
+  if (!weatherData.list) {
+    return <div>Loading...</div>;
+  }
+
+  const weather = weatherData.list.map((day, index) => {
+    return (
+      <Card key={index}>
+        <Card.Content>
+          <Card.Header>{day.dt_txt}</Card.Header>
+          <Card.Description>
+            Temperature: {day.main.temp}°C
+          </Card.Description>
+          <Card.Description>
+            Description: {day.weather[0].description}
+          </Card.Description>
+        </Card.Content>
+      </Card>
+    );
+  });
+
+  return <div>{weather}</div>;
+};
+
+export default Weather;
