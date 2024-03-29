@@ -1,1 +1,94 @@
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
 
+mongoose.connect('mongodb://localhost/url-shortener', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
+
+app.use(express.urlencoded({ extended: true }));
+
+app.post('/api/shorten', async (req, res) => {
+  // handles shortening URLs and storing them in the database
+});
+
+app.listen(3000, () => {
+  console.log('Server listening on port 3000');
+});
+
+const mongoose = require('mongoose');
+
+const UrlSchema = new mongoose.Schema({
+  original: {
+    type: String,
+    required: true,
+  },
+  short: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  clicks: {
+    type: Number,
+    default: 0,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+const Url = mongoose.model('Url', UrlSchema);
+
+module.exports = Url;
+
+const Url = require('./models/url');
+
+app.post('/api/shorten', async (req, res) => {
+  const original = req.body.url;
+
+  if (!original.startsWith('http://') && !original.startsWith('https://')) {
+    return res.status(400).json({
+      error: 'Please provide a valid URL',
+    });
+  }
+
+  // generate a unique short URL for the given original URL
+  let short = '';
+  do {
+    short = generateRandomString(5);
+    const existingUrl = await Url.findOne({ short });
+  } while (existingUrl);
+
+  // create a new URL and save it in the database
+  const url = new Url({
+    original,
+    short,
+  });
+  await url.save();
+
+  return res.json({
+    short: url.short,
+  });
+});
+
+// returns a random string of the given length
+function generateRandomString(length) {
+  let text = '';
+  const possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+
+  return text;
+}
